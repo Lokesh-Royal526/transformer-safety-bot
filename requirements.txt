@@ -1,0 +1,4 @@
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+python-telegram-bot==20.7
+firebase-admin==6.5.0
