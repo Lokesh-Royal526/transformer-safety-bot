@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: transformer-safety-bot
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: TELEGRAM_TOKEN
+        sync: false
+      - key: AUTHORIZED_CHAT_IDS
+        value: "5232865054"   # comma-separated if multiple
+      - key: FIREBASE_DB_URL
+        value: "https://transformer-accidents-default-rtdb.firebaseio.com"
+      - key: FB_ROOT
+        value: "transformer_safety"
+      - key: GOOGLE_APPLICATION_CREDENTIALS_JSON
+        sync: false          # paste the *contents* of adminsdk.json
+      - key: PUBLIC_BASE_URL
+        sync: false          # e.g. "https://transformer-safety-bot.onrender.com"
+      - key: WEBHOOK_SECRET
+        sync: false          # optional; if unset, the bot token path works
+      # Optional overrides:
+      - key: CURRENT_THRESHOLD
+        value: "2.0"
+      - key: TEMP_THRESHOLD
+        value: "50.0"
+      - key: WARNING_ZONE_CM
+        value: "1000"
+      - key: DANGER_ZONE_CM
+        value: "500"
